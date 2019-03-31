@@ -58,10 +58,10 @@ const mapStateToProps = ({ boardList: { boards, loading, error }}) => {
   return { boards: boards, loading, error };
 };
 
-const mapDispatchToProps = (dispatch, { boardStoreService }) => {
+const mapDispatchToProps = (dispatch, { service }) => {
 
   return bindActionCreators({
-    fetchBoards: fetchBoards(boardStoreService)
+    fetchBoards: fetchBoards(service)
   }, dispatch);
 };
 

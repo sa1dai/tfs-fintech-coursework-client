@@ -10,12 +10,12 @@ import { ServiceProvider } from './components/service-context';
 
 import store from './store';
 
-const boardStoreService = new DummyService();
+const service = new DummyService();
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
-      <ServiceProvider value={boardStoreService}>
+      <ServiceProvider value={service}>
         <Router>
           <App />
         </Router>

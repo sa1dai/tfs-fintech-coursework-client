@@ -20,9 +20,9 @@ const boardsError = (error) => {
   };
 };
 
-const fetchBoards = (boardStoreService) => () => (dispatch) => {
+const fetchBoards = (service) => () => (dispatch) => {
   dispatch(boardsRequested());
-  boardStoreService.getBoards()
+  service.getBoards()
     .then((data) => dispatch(boardsLoaded(data)))
     .catch((err) => dispatch(boardsError(err)));
 };
