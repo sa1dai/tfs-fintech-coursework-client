@@ -1,6 +1,19 @@
 import { ActionTypes } from '../actions';
 
-const updateBoardList = (state, action) => {
+const updateBoardList = (state, newBoard) => {
+  const { boardList: { boards } } = state;
+
+  return {
+    boards: [
+      ...boards,
+      newBoard
+    ],
+    loading: false,
+    error: null
+  };
+};
+
+const boardListReducer = (state, action) => {
 
   if (state === undefined) {
     return {
@@ -32,9 +45,12 @@ const updateBoardList = (state, action) => {
         error: action.payload
       };
 
+    case ActionTypes.createBoardSuccess:
+      return updateBoardList(state, action.payload);
+
     default:
       return state.boardList;
   }
 };
 
-export default updateBoardList;
+export default boardListReducer;

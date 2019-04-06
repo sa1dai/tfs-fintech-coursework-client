@@ -12,18 +12,22 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 import './board-list.css';
+import BoardCreateForm from '../board-create-form';
 
 const BoardList = ({ boards }) => {
   return (
     <React.Fragment>
-      <h2 className="board-list-header">Your boards</h2>
-      <ul className="board-list">
+      <h1 className="text-center">Your boards</h1>
+
+      { boards.length === 0 && <p className="empty-board-list-text text-center">You dont have any boards</p> }
+
+      <ul className="board-list list-group">
         {
           boards.map((board) => {
             return (
-              <li key={board.id}>
-                <BoardListItem
-                  board={board}/>
+              <li className="board-list-item text-center list-group-item"
+                  key={board.id}>
+                <BoardListItem board={board}/>
               </li>
             );
           })
@@ -50,7 +54,12 @@ class BoardListContainer extends Component {
       return <ErrorIndicator />;
     }
 
-    return <BoardList boards={boards}/>;
+    return (
+      <React.Fragment>
+        <BoardList boards={boards}/>
+        <BoardCreateForm />
+      </React.Fragment>
+    );
   }
 }
 

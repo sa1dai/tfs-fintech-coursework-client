@@ -1,8 +1,10 @@
-import updateBoardList from './board-list';
+import boardListReducer from './board-list';
+import boardCreateFormReducer from './board-create-form';
 
 const reducer = (state, action) => {
   return {
-    boardList: updateBoardList(state, action)
+    boardList: boardListReducer(state, action),
+    boardCreateForm: boardCreateFormReducer(state, action)
   };
 };
 

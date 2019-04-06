@@ -9,12 +9,33 @@ export default class ApiService {
       throw new Error(`Could not fetch ${url}` +
         `, received ${res.status}`)
     }
+
+    return await res.json();
+  };
+
+  createResource = async (url, resource) => {
+    const res = await fetch(`${this._apiBase}${url}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(resource)
+    });
+
+    if (!res.ok) {
+      throw new Error(`Could not create resource ${url}` +
+        `, received ${res.status}`)
+    }
+
     return await res.json();
   };
 
   getBoards = async () => {
-    const res = await this.getResource(`/boards`);
-    console.log(res);
-    return res;
+   return await this.getResource(`/boards`);
+  };
+
+  createBoard = async (boardTitle) => {
+    return await this.createResource('/boards', {title: boardTitle});
   };
 }
