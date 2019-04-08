@@ -1,10 +1,11 @@
 import React from 'react';
 import './board-list-item.css';
+import { Link } from 'react-router-dom';
 
 const BoardListItem = ({ board }) => {
-  const { title } = board;
+  const { title, url } = board;
   return (
-    <span className="board-list-item">{title}</span>
+    <Link to={decodeURI(url)} className="board-list-item">{title}</Link>
   );
 };
 

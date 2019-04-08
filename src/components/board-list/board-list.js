@@ -64,7 +64,7 @@ class BoardListContainer extends Component {
 }
 
 const mapStateToProps = ({ boardList: { boards, loading, error }}) => {
-  return { boards: boards, loading, error };
+  return { boards, loading, error };
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {

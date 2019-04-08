@@ -27,4 +27,16 @@ export default class ActionTypes {
   static get createBoardTitleChanged() {
     return 'CREATE_BOARD_TITLE_CHANGED';
   }
+
+  static get fetchBoardRequest() {
+    return 'FETCH_BOARD_REQUEST';
+  }
+
+  static get fetchBoardSuccess() {
+    return 'FETCH_BOARD_SUCCESS';
+  }
+
+  static get fetchBoardFailure() {
+    return 'FETCH_BOARD_FAILURE';
+  }
 }

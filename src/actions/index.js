@@ -47,6 +47,26 @@ export const createBoardTitleChanged = (boardTitle) => {
   };
 };
 
+const boardRequested = () => {
+  return {
+    type: ActionTypes.fetchBoardRequest
+  };
+};
+
+const boardLoaded = (board) => {
+  return {
+    type: ActionTypes.fetchBoardSuccess,
+    payload: board
+  };
+};
+
+const boardError = (error) => {
+  return {
+    type: ActionTypes.fetchBoardFailure,
+    payload: error
+  };
+};
+
 const fetchBoards = (service) => () => (dispatch) => {
   dispatch(boardsRequested());
   service.getBoards()
@@ -61,8 +81,16 @@ const createBoard = (service) => (newBoard) => (dispatch) => {
     .catch((err) => dispatch(createBoardError(err)));
 };
 
+const fetchBoard = (service) => (boardId) => (dispatch) => {
+  dispatch(boardRequested());
+  service.getBoard(boardId)
+    .then((data) => dispatch(boardLoaded(data)))
+    .catch((err) => dispatch(boardError(err)));
+};
+
 export {
   fetchBoards,
   createBoard,
+  fetchBoard,
   ActionTypes
 };

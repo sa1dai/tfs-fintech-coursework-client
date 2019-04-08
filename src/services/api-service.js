@@ -38,4 +38,8 @@ export default class ApiService {
   createBoard = async (boardTitle) => {
     return await this.createResource('/boards', {title: boardTitle});
   };
+
+  getBoard = async (boardId) => {
+    return await this.getResource(`/boards/${boardId}`);
+  };
 }
