@@ -11,6 +11,7 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 import './board-create-form.css';
+import {withRouter} from "react-router-dom";
 
 const BoardCreateForm = ({ boardTitle, onSubmit, onTitleChanged, formIsValid }) => {
   const buttonClassName = formIsValid ? "btn-success" : "btn-warning cursor-not-allowed";
@@ -45,7 +46,7 @@ class BoardCreateFormContainer extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     if (this.formIsValid) {
-      this.props.createBoard(this.props.boardTitle);
+      this.props.createBoard(this.props.boardTitle, this.props.history);
     }
   };
 
@@ -70,7 +71,15 @@ class BoardCreateFormContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ boardCreateForm: { boardTitle, serverIsProcessingRequest, error }}) => {
+const mapStateToProps = (
+  {
+    boardCreateForm:
+    {
+      boardTitle,
+      serverIsProcessingRequest,
+      error
+    }
+  }) => {
   return { boardTitle, serverIsProcessingRequest, error };
 };
 
@@ -84,5 +93,5 @@ const mapDispatchToProps = (dispatch, { service }) => {
 
 export default compose(
   withService(),
-  connect(mapStateToProps, mapDispatchToProps)
-)(BoardCreateFormContainer);
+  connect(mapStateToProps, mapDispatchToProps),
+)(withRouter(BoardCreateFormContainer));

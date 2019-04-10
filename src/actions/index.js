@@ -74,11 +74,18 @@ const fetchBoards = (service) => () => (dispatch) => {
     .catch((err) => dispatch(boardsError(err)));
 };
 
-const createBoard = (service) => (newBoard) => (dispatch) => {
+const createBoard = (service) => (newBoard, history) => (dispatch) => {
   dispatch(createBoardRequested());
   service.createBoard(newBoard)
-    .then((data) => dispatch(createBoardSuccess(data)))
-    .catch((err) => dispatch(createBoardError(err)));
+    .then((data) => {
+      const { url } = data;
+
+      dispatch(createBoardSuccess(data));
+      history.push(url);
+    })
+    .catch((err) => {
+      dispatch(createBoardError(err))
+    });
 };
 
 const fetchBoard = (service) => (boardId) => (dispatch) => {
