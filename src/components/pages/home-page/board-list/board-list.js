@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import BoardListItem from '../board-list-item';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { withService } from '../hoc';
-import { fetchBoards } from '../../actions';
-import { compose } from '../../utils';
-
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
-
 import './board-list.css';
-import BoardCreateForm from '../board-create-form';
+import Spinner from "src/components/spinner";
+import withService from "src/components/hoc/with-service";
+import BoardListItem from "src/components/pages/home-page/board-list-item";
+import BoardListAddForm from "src/components/pages/home-page/board-list-add-form";
+import compose from "src/utils/compose";
+import {fetchBoards} from "../../../../actions";
+import ErrorIndicator from "src/components/error-indicator";
 
 const BoardList = ({ boards }) => {
   return (
@@ -57,13 +55,13 @@ class BoardListContainer extends Component {
     return (
       <React.Fragment>
         <BoardList boards={boards}/>
-        <BoardCreateForm />
+        <BoardListAddForm />
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ boardList: { boards, loading, error }}) => {
+const mapStateToProps = ({ boardListAsync: { boards, loading, error }}) => {
   return { boards, loading, error };
 };
 

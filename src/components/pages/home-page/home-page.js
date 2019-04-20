@@ -1,7 +1,7 @@
 import React from 'react';
-import BoardList from '../board-list';
 
 import './home-page.css';
+import BoardList from './board-list';
 
 const HomePage = () => {
   return (

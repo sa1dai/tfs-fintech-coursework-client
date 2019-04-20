@@ -20,29 +20,29 @@ const boardsError = (error) => {
   };
 };
 
-const createBoardRequested = () => {
+const addBoardRequested = () => {
   return {
-    type: ActionTypes.createBoardRequest
+    type: ActionTypes.addBoardRequest
   };
 };
 
-const createBoardSuccess = (boards) => {
+const addBoardSuccess = (boards) => {
   return {
-    type: ActionTypes.createBoardSuccess,
+    type: ActionTypes.addBoardSuccess,
     payload: boards
   };
 };
 
-const createBoardError = (error) => {
+const addBoardError = (error) => {
   return {
-    type: ActionTypes.createBoardFailure,
+    type: ActionTypes.addBoardFailure,
     payload: error
   };
 };
 
-export const createBoardTitleChanged = (boardTitle) => {
+export const boardAddTitleChanged = (boardTitle) => {
   return {
-    type: ActionTypes.createBoardTitleChanged,
+    type: ActionTypes.boardAddTitleChanged,
     payload: boardTitle
   };
 };
@@ -67,6 +67,47 @@ const boardError = (error) => {
   };
 };
 
+const boardSaved = () => {
+  return {
+    type: ActionTypes.saveBoardSuccess,
+  };
+};
+
+const boardSaveError = (error) => {
+  return {
+    type: ActionTypes.saveBoardFailure,
+    payload: error
+  };
+};
+
+export const columnAddTitleChanged = (columnTitle) => {
+  return {
+    type: ActionTypes.columnAddTitleChanged,
+    payload: columnTitle
+  };
+};
+
+export const addColumn = (columnTitle) => {
+  return {
+    type: ActionTypes.addColumn,
+    payload: columnTitle
+  };
+};
+
+export const columnItemAddTitleChanged = (columnItemTitle) => {
+  return {
+    type: ActionTypes.columnItemAddTitleChanged,
+    payload: columnItemTitle
+  };
+};
+
+export const addColumnItem = (columnIndex, columnItemTitle) => {
+  return {
+    type: ActionTypes.addColumnItem,
+    payload: { columnIndex, columnItemTitle }
+  };
+};
+
 const fetchBoards = (service) => () => (dispatch) => {
   dispatch(boardsRequested());
   service.getBoards()
@@ -74,17 +115,17 @@ const fetchBoards = (service) => () => (dispatch) => {
     .catch((err) => dispatch(boardsError(err)));
 };
 
-const createBoard = (service) => (newBoard, history) => (dispatch) => {
-  dispatch(createBoardRequested());
-  service.createBoard(newBoard)
+const addBoard = (service) => (newBoard, history) => (dispatch) => {
+  dispatch(addBoardRequested());
+  service.addBoard(newBoard)
     .then((data) => {
       const { url } = data;
 
-      dispatch(createBoardSuccess(data));
+      dispatch(addBoardSuccess(data));
       history.push(url);
     })
     .catch((err) => {
-      dispatch(createBoardError(err))
+      dispatch(addBoardError(err))
     });
 };
 
@@ -95,9 +136,16 @@ const fetchBoard = (service) => (boardId) => (dispatch) => {
     .catch((err) => dispatch(boardError(err)));
 };
 
+const saveBoard = (service) => (boardId, board) => (dispatch) => {
+  service.saveBoard(boardId, board)
+    .then(() => dispatch(boardSaved()))
+    .catch(() => dispatch(boardSaveError()));
+};
+
 export {
   fetchBoards,
-  createBoard,
+  addBoard,
   fetchBoard,
+  saveBoard,
   ActionTypes
 };

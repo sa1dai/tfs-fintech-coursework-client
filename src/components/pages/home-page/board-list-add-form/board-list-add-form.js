@@ -3,25 +3,23 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { withService } from '../hoc';
-import { createBoard, createBoardTitleChanged } from '../../actions';
-import { compose } from '../../utils';
-
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
-
-import './board-create-form.css';
+import './board-list-add-form.css';
 import {withRouter} from "react-router-dom";
+import Spinner from "src/components/spinner";
+import ErrorIndicator from "src/components/error-indicator";
+import compose from "src/utils/compose";
+import withService from "src/components/hoc/with-service";
+import {addBoard, boardAddTitleChanged} from "src/actions";
 
-const BoardCreateForm = ({ boardTitle, onSubmit, onTitleChanged, formIsValid }) => {
+const BoardListAddForm = ({ boardTitle, onSubmit, onTitleChanged, formIsValid }) => {
   const buttonClassName = formIsValid ? "btn-success" : "btn-warning cursor-not-allowed";
 
   return (
-    <form className="create-form d-flex"
+    <form className="create-form d-flex board-list-add-form"
           onSubmit={onSubmit}>
 
       <input type="text"
-             className="form-control create-board-title"
+             className="form-control "
              value={boardTitle}
              onChange={onTitleChanged}
              placeholder="Board title" />
@@ -33,20 +31,20 @@ const BoardCreateForm = ({ boardTitle, onSubmit, onTitleChanged, formIsValid }) 
   );
 };
 
-class BoardCreateFormContainer extends Component {
+class BoardListAddFormContainer extends Component {
 
   formIsValid = () => {
     return this.props.boardTitle.trim().length > 0;
   };
 
   onTitleChanged = (e) => {
-    this.props.createBoardTitleChanged(e.target.value);
+    this.props.boardAddTitleChanged(e.target.value);
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.formIsValid) {
-      this.props.createBoard(this.props.boardTitle, this.props.history);
+    if (this.formIsValid()) {
+      this.props.addBoard(this.props.boardTitle, this.props.history);
     }
   };
 
@@ -55,7 +53,7 @@ class BoardCreateFormContainer extends Component {
 
     let boardCreateForm = serverIsProcessingRequest
       ? <Spinner />
-      : <BoardCreateForm
+      : <BoardListAddForm
           boardTitle={boardTitle}
           onSubmit={this.onSubmit}
           onTitleChanged={this.onTitleChanged}
@@ -73,7 +71,7 @@ class BoardCreateFormContainer extends Component {
 
 const mapStateToProps = (
   {
-    boardCreateForm:
+    boardListAddForm:
     {
       boardTitle,
       serverIsProcessingRequest,
@@ -86,12 +84,14 @@ const mapStateToProps = (
 const mapDispatchToProps = (dispatch, { service }) => {
 
   return bindActionCreators({
-    createBoard: createBoard(service),
-    createBoardTitleChanged: createBoardTitleChanged
+    addBoard: addBoard(service),
+    boardAddTitleChanged: boardAddTitleChanged
   }, dispatch);
 };
 
 export default compose(
   withService(),
   connect(mapStateToProps, mapDispatchToProps),
-)(withRouter(BoardCreateFormContainer));
+)(withRouter(BoardListAddFormContainer));
+
+//export default BoardListAddFormContainer;

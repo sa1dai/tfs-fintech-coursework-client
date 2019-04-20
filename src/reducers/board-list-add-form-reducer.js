@@ -1,6 +1,6 @@
 import { ActionTypes } from '../actions';
 
-const boardCreateFormReducer = (state, action) => {
+const boardListAddFormReducer = (state, action) => {
 
   if (state === undefined) {
     return {
@@ -11,28 +11,28 @@ const boardCreateFormReducer = (state, action) => {
   }
 
   switch (action.type) {
-    case ActionTypes.createBoardRequest:
+    case ActionTypes.addBoardRequest:
       return {
         boardTitle: "",
         serverIsProcessingRequest: true,
         error: null
       };
 
-    case ActionTypes.createBoardSuccess:
+    case ActionTypes.addBoardSuccess:
       return {
         boardTitle: "",
         serverIsProcessingRequest: false,
         error: null
       };
 
-    case ActionTypes.createBoardFailure:
+    case ActionTypes.addBoardFailure:
       return {
         boardTitle: "",
         serverIsProcessingRequest: false,
         error: action.payload
       };
 
-    case ActionTypes.createBoardTitleChanged:
+    case ActionTypes.boardAddTitleChanged:
       return {
         boardTitle: action.payload,
         serverIsProcessingRequest: false,
@@ -40,8 +40,8 @@ const boardCreateFormReducer = (state, action) => {
       };
 
     default:
-      return state.boardCreateForm;
+      return state.boardListAddForm;
   }
 };
 
-export default boardCreateFormReducer;
+export default boardListAddFormReducer;

@@ -12,20 +12,20 @@ export default class ActionTypes {
     return 'FETCH_BOARDS_FAILURE';
   }
 
-  static get createBoardRequest() {
-    return 'CREATE_BOARD_REQUEST';
+  static get addBoardRequest() {
+    return 'ADD_BOARD_REQUEST';
   }
 
-  static get createBoardSuccess() {
-    return 'CREATE_BOARD_SUCCESS';
+  static get addBoardSuccess() {
+    return 'ADD_BOARD_SUCCESS';
   }
 
-  static get createBoardFailure() {
-    return 'CREATE_BOARD_FAILURE';
+  static get addBoardFailure() {
+    return 'ADD_BOARD_FAILURE';
   }
 
-  static get createBoardTitleChanged() {
-    return 'CREATE_BOARD_TITLE_CHANGED';
+  static get boardAddTitleChanged() {
+    return 'BOARD_ADD_TITLE_CHANGED';
   }
 
   static get fetchBoardRequest() {
@@ -38,5 +38,29 @@ export default class ActionTypes {
 
   static get fetchBoardFailure() {
     return 'FETCH_BOARD_FAILURE';
+  }
+
+  static get saveBoardSuccess() {
+    return 'SAVE_BOARD_SUCCESS';
+  }
+
+  static get saveBoardFailure() {
+    return 'SAVE_BOARD_FAILURE';
+  }
+
+  static get addColumn() {
+    return 'ADD_COLUMN';
+  }
+
+  static get columnAddTitleChanged() {
+    return 'COLUMN_ADD_TITLE_CHANGED';
+  }
+
+  static get addColumnItem() {
+    return 'ADD_COLUMN_ITEM';
+  }
+
+  static get columnItemAddTitleChanged() {
+    return 'COLUMN_ITEM_ADD_TITLE_CHANGED';
   }
 }

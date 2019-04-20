@@ -1,0 +1,17 @@
+.column-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.column-list-item {
+    overflow-wrap: break-word;
+}
+
+.empty-card-column-list-text {
+    margin-bottom: 0;
+}
+
+.column-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

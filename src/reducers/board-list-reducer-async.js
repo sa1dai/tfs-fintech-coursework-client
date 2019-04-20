@@ -1,6 +1,6 @@
 import { ActionTypes } from '../actions';
 
-const boardListReducer = (state, action) => {
+const boardListReducerAsync = (state, action) => {
 
   if (state === undefined) {
     return {
@@ -33,8 +33,8 @@ const boardListReducer = (state, action) => {
       };
 
     default:
-      return state.boardList;
+      return state.boardListAsync;
   }
 };
 
-export default boardListReducer;
+export default boardListReducerAsync;

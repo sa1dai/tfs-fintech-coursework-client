@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { HomePage } from '../pages';
+import { HomePage } from '../pages/home-page';
 
 import './app.css';
-import BoardContainer from "../board/board";
+import Board from "src/components/pages/board-page/board";
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/b/:id/:title"
                render={({ match }) => {
                  const { id } = match.params;
-                 return <BoardContainer boardId={id} />
+                 return <Board boardId={id} />
                }}
                exact />
       </Switch>
