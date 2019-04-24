@@ -1,0 +1,23 @@
+.home-link {
+    font-size: 1.5rem;
+    width: 60px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: white;
+    display: inline-block;
+}
+
+.header {
+    background: #2C3E50;
+}
+
+.logo {
+    font-size: 1.7rem;
+    color: white;
+}
+
+.logo-wrapper {
+    margin-left: 427px;
+    display: inline-block;
+}

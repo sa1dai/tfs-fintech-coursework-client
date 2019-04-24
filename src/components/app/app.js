@@ -4,10 +4,12 @@ import { HomePage } from '../pages/home-page';
 
 import './app.css';
 import Board from "src/components/pages/board-page/board";
+import Header from "src/components/header";
 
 const App = () => {
   return (
     <main role="main" className="main">
+      <Header />
       <Switch>
         <Route path="/"
                component={HomePage}

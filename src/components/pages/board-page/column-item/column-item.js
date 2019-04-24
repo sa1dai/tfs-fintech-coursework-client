@@ -1,19 +1,18 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './column-item.css';
 import { Link } from 'react-router-dom';
 import {Draggable} from "react-beautiful-dnd";
 
-const ColumnItem = ({ columnItem, index }) => {
-  const { id, title, url } = columnItem;
-  return (
-    <Link
-      to={decodeURI(url)}
-      className="card-column-item"
-
-    >
-      {title}
-    </Link>
-  );
-};
+class ColumnItem  extends Component {
+  render() {
+    const { columnItem, index } = this.props;
+    const { id, title } = columnItem;
+    return (
+      <React.Fragment>
+        {title}
+      </React.Fragment>
+    );
+  }
+}
 
 export default ColumnItem;

@@ -17,6 +17,10 @@
     padding: 1rem;
 }
 
+.column-list-item:first-child {
+    margin-left: 10px;
+}
+
 .empty-card-column-list-text {
     margin-bottom: 0;
 }
