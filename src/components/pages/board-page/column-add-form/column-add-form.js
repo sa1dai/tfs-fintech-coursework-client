@@ -17,7 +17,7 @@ const ColumnAddForm = ({ inputId, columnItemTitle, onSubmit, onTitleChanged }) =
              className="form-control"
              value={columnItemTitle}
              onChange={onTitleChanged}
-             placeholder="Add a card" />
+             placeholder="Enter item title..." />
 
       <button type="submit"
               className="btn btn-success">Add</button>

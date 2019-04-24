@@ -115,6 +115,13 @@ export const dropColumnItem = (dropInfo) => {
   };
 };
 
+export const deleteColumnItem = (columnIndex, columnItemIndex) => {
+  return {
+    type: ActionTypes.deleteColumnItem,
+    payload: { columnIndex, columnItemIndex }
+  };
+};
+
 export const dropColumn = (dropInfo) => {
   return {
     type: ActionTypes.dropColumn,

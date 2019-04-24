@@ -68,6 +68,10 @@ export default class ActionTypes {
     return 'COLUMN_ITEM_DROP';
   }
 
+  static get deleteColumnItem() {
+    return 'COLUMN_ITEM_DELETE';
+  }
+
   static get dropColumn() {
     return 'COLUMN_DROP';
   }

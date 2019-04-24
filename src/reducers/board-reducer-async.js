@@ -54,6 +54,13 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
+const remove = (list, removeIndex) => {
+  const result = Array.from(list);
+  result.splice(removeIndex, 1);
+
+  return result;
+};
+
 const swapItemsInColumn = (column, startIndex, endIndex) => {
   return {
     ...column,
@@ -165,6 +172,22 @@ const dropColumn = (
   }
 };
 
+const deleteItemFromColumn = (column, columnItemIndex) => {
+  return {
+    ...column,
+    items: remove(column.items, columnItemIndex)
+  };
+};
+
+const deleteColumnItem = ({ board }, { columnIndex, columnItemIndex }) => {
+  const { columns } = board;
+
+  return {
+    ...board,
+    columns: columns.map((column, i) => i === columnIndex ? deleteItemFromColumn(column, columnItemIndex): column)
+  }
+};
+
 const boardReducerAsync = (state, action) => {
 
   if (state === undefined) {
@@ -218,12 +241,21 @@ const boardReducerAsync = (state, action) => {
         error: null
       };
 
+    case ActionTypes.deleteColumnItem:
+      return {
+        board: deleteColumnItem(state.boardAsync, action.payload),
+        loading: false,
+        error: null
+      };
+
     case ActionTypes.dropColumn:
       return {
         board: dropColumn(state.boardAsync, action.payload),
         loading: false,
         error: null
       };
+
+
 
     default:
       return state.boardAsync;

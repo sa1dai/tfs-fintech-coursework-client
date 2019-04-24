@@ -39,7 +39,11 @@ const Column = ({ column, columnIndex, provided }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                   >
-                    <ColumnItem columnItem={columnItem} index={index}/>
+                    <ColumnItem
+                      columnItem={columnItem}
+                      columnIndex={columnIndex}
+                      columnItemIndex={index}
+                    />
                   </div>
                 )}
               </Draggable>
