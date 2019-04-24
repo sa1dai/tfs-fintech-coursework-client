@@ -9,7 +9,7 @@ import compose from "src/utils/compose";
 
 const ColumnListAddForm = ({ inputId, columnTitle, onSubmit, onTitleChanged }) => {
   return (
-    <form className="create-form column-list-add-form d-flex"
+    <form className="create-form column-list-add-form"
           onSubmit={onSubmit}>
 
       <input id={inputId}

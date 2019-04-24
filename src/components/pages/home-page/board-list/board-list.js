@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import './board-list.css';
 import Spinner from "src/components/spinner";
-import withService from "src/components/hoc/with-service";
+import withService from "src/hoc/with-service";
 import BoardListItem from "src/components/pages/home-page/board-list-item";
 import BoardListAddForm from "src/components/pages/home-page/board-list-add-form";
 import compose from "src/utils/compose";

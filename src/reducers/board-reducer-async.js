@@ -1,9 +1,11 @@
 import { ActionTypes } from '../actions';
+import getRandomString from "src/utils/get-random-string";
 
 const addColumn = ({ board }, columnTitle) => {
   const { columns } = board;
 
   const column = {
+    id: getRandomString(),
     title: columnTitle,
     items: []
   };
@@ -31,14 +33,12 @@ const addItemToColumn = (column, columnItem) => {
 
 const addColumnItem = ({ board }, { columnIndex, columnItemTitle }) => {
   const { columns } = board;
-  // const columnsCopy = //clone(columns);
-  //
+
   const columnItem = {
+    id: getRandomString(),
     title: columnItemTitle,
     url: '#'
   };
-
-  //columnsCopy[columnIndex].items =  .push(columnItem);
 
   return {
     ...board,
@@ -46,6 +46,124 @@ const addColumnItem = ({ board }, { columnIndex, columnItemTitle }) => {
   }
 };
 
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+const swapItemsInColumn = (column, startIndex, endIndex) => {
+  return {
+    ...column,
+    items: reorder(column.items, startIndex, endIndex)
+  };
+};
+
+const move = (source, destination, startColumnId, startItemIndex, endColumnId, endItemIndex) => {
+  const sourceClone = Array.from(source);
+  const destClone = Array.from(destination);
+  const [removed] = sourceClone.splice(startItemIndex, 1);
+
+  destClone.splice(endItemIndex, 0, removed);
+
+  const result = {};
+  result[startColumnId] = sourceClone;
+  result[endColumnId] = destClone;
+
+  return result;
+};
+
+const dropColumnItem = (
+  { board },
+  {
+    source:
+      {
+        droppableId: startColumnId,
+        index: startItemIndex
+      },
+    destination
+  }) => {
+
+  if (!destination) {
+    return {
+      ...board
+    }
+  }
+
+  const { columns } = board;
+  const { droppableId: endColumnId, index: endItemIndex} = destination;
+
+  if (startColumnId === endColumnId) {
+    const columnIndex = columns.findIndex(column => column.id === startColumnId);
+
+    return {
+      ...board,
+      columns: columns.map((column, index) => index === columnIndex
+                                            ? swapItemsInColumn(column, startItemIndex, endItemIndex)
+                                            : column)
+    }
+  }
+
+  const startColumnIndex = columns.findIndex(column => column.id === startColumnId);
+  const endColumnIndex = columns.findIndex(column => column.id === endColumnId);
+
+  const result = move(
+    columns.find(column => column.id === startColumnId).items,
+    columns.find(column => column.id === endColumnId).items,
+    startColumnId,
+    startItemIndex,
+    endColumnId,
+    endItemIndex);
+
+  return {
+    ...board,
+    columns: columns.map((column, index) => {
+      if (index === startColumnIndex) {
+        return {
+          ...column,
+          items: result[startColumnId]
+        }
+      }
+
+      if (index === endColumnIndex) {
+        return {
+          ...column,
+          items: result[endColumnId]
+        }
+      }
+
+      return column;
+    })
+  }
+};
+
+const dropColumn = (
+  { board },
+  {
+    source:
+      {
+        droppableId: startColumnId,
+        index: startColumnIndex
+      },
+    destination
+  }) => {
+
+  if (!destination) {
+    return {
+      ...board
+    }
+  }
+
+  const { columns } = board;
+  const { index: endColumnIndex} = destination;
+
+  return {
+    ...board,
+    columns: reorder(columns, startColumnIndex, endColumnIndex)
+  }
+};
 
 const boardReducerAsync = (state, action) => {
 
@@ -89,6 +207,20 @@ const boardReducerAsync = (state, action) => {
     case ActionTypes.addColumnItem:
       return {
         board: addColumnItem(state.boardAsync, action.payload),
+        loading: false,
+        error: null
+      };
+
+    case ActionTypes.dropColumnItem:
+      return {
+        board: dropColumnItem(state.boardAsync, action.payload),
+        loading: false,
+        error: null
+      };
+
+    case ActionTypes.dropColumn:
+      return {
+        board: dropColumn(state.boardAsync, action.payload),
         loading: false,
         error: null
       };

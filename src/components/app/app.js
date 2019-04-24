@@ -7,7 +7,7 @@ import Board from "src/components/pages/board-page/board";
 
 const App = () => {
   return (
-    <main role="main" className="container">
+    <main role="main" className="main">
       <Switch>
         <Route path="/"
                component={HomePage}

@@ -8,7 +8,7 @@ import {withRouter} from "react-router-dom";
 import Spinner from "src/components/spinner";
 import ErrorIndicator from "src/components/error-indicator";
 import compose from "src/utils/compose";
-import withService from "src/components/hoc/with-service";
+import withService from "src/hoc/with-service";
 import {addBoard, boardAddTitleChanged} from "src/actions";
 
 const BoardListAddForm = ({ boardTitle, onSubmit, onTitleChanged, formIsValid }) => {

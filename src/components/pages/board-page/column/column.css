@@ -15,3 +15,16 @@
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+.column-item {
+    margin-bottom: 5px;
+    box-shadow: 0 1px 0 rgba(9, 45, 66, .25);
+}
+
+.column {
+    min-height: 20px;
+    max-height: 440px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 40px;
+}

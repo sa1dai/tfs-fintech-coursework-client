@@ -108,6 +108,20 @@ export const addColumnItem = (columnIndex, columnItemTitle) => {
   };
 };
 
+export const dropColumnItem = (dropInfo) => {
+  return {
+    type: ActionTypes.dropColumnItem,
+    payload: dropInfo
+  };
+};
+
+export const dropColumn = (dropInfo) => {
+  return {
+    type: ActionTypes.dropColumn,
+    payload: dropInfo
+  };
+};
+
 const fetchBoards = (service) => () => (dispatch) => {
   dispatch(boardsRequested());
   service.getBoards()

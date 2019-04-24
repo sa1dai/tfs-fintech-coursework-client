@@ -63,4 +63,12 @@ export default class ActionTypes {
   static get columnItemAddTitleChanged() {
     return 'COLUMN_ITEM_ADD_TITLE_CHANGED';
   }
+
+  static get dropColumnItem() {
+    return 'COLUMN_ITEM_DROP';
+  }
+
+  static get dropColumn() {
+    return 'COLUMN_DROP';
+  }
 }
