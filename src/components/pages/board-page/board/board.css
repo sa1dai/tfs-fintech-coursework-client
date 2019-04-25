@@ -1,0 +1,18 @@
+.board-title {
+    margin-left: 10px;
+    display: inline-block;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 2em;
+}
+
+.board-button {
+    margin-left: 5px;
+}
+
+.board-title-wrapper {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}

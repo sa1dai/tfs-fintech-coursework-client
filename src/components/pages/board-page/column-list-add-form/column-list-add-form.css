@@ -1,0 +1,11 @@
+.column-list-add-form input {
+    margin-right: 3px;
+    display: inline-block;
+}
+
+.column-list-add-form {
+    width: 230px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
