@@ -1,12 +1,8 @@
 import React from 'react';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 import './column-list.css';
 import Column from "src/components/pages/board-page/column";
 import ColumnListAddForm from "src/components/pages/board-page/column-list-add-form";
-import compose from "src/utils/compose";
 import {Draggable, Droppable} from "react-beautiful-dnd";
 
 const ColumnList = ({ columns }) => {
@@ -58,10 +54,4 @@ const ColumnListContainer = ({ columns } ) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
-};
-
-export default compose(
-  connect(mapDispatchToProps)
-)(ColumnListContainer);
+export default ColumnListContainer;

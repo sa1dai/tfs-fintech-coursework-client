@@ -28,6 +28,18 @@ export default class ActionTypes {
     return 'BOARD_ADD_TITLE_CHANGED';
   }
 
+  static get deleteBoardRequest() {
+    return 'DELETE_BOARD_REQUEST';
+  }
+
+  static get deleteBoardSuccess() {
+    return 'DELETE_BOARD_SUCCESS';
+  }
+
+  static get deleteBoardFailure() {
+    return 'DELETE_BOARD_FAILURE';
+  }
+
   static get fetchBoardRequest() {
     return 'FETCH_BOARD_REQUEST';
   }
@@ -74,5 +86,9 @@ export default class ActionTypes {
 
   static get dropColumn() {
     return 'COLUMN_DROP';
+  }
+
+  static get deleteColumn() {
+    return 'COLUMN_DELETE';
   }
 }

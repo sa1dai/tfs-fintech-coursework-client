@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Spinner from "src/components/spinner";
 import ErrorIndicator from "src/components/error-indicator";
-import {dropColumn, dropColumnItem, fetchBoard, saveBoard} from "src/actions";
+import {deleteBoard, dropColumn, dropColumnItem, fetchBoard, saveBoard} from "src/actions";
 import compose from "src/utils/compose";
 import withService from "src/hoc/with-service";
 import ColumnList from "src/components/pages/board-page/column-list";
 import {DragDropContext} from "react-beautiful-dnd";
 
 import './board.css';
+import {withRouter} from "react-router-dom";
 
 class Board extends Component {
   componentDidUpdate() {
@@ -27,12 +28,32 @@ class Board extends Component {
     }
   };
 
+  onBoardDelete = () => {
+    const { boardId, deleteBoard, history } = this.props;
+    const result = window.prompt("The board will be deleted. Type 111 to delete it.");
+
+    if (result === '111') {
+      deleteBoard(boardId, history);
+    }
+  };
+
   render() {
     const { board: { title, columns } } = this.props;
 
     return (
       <React.Fragment>
-        <h1 className="board-title">{title}</h1>
+        <div className="d-flex board-title-wrapper">
+          <h1 className="board-title">
+            {title}
+          </h1>
+          <button
+            className="btn btn-secondary btn-sm board-button"
+            onClick={this.onBoardDelete}
+          >
+            <i className="fas fa-trash-alt"/>
+          </button>
+        </div>
+
         <DragDropContext onDragEnd={this.onDragEnd}>
           <ColumnList columns={columns}/>
         </DragDropContext>
@@ -63,6 +84,8 @@ class BoardContainer extends Component {
               saveBoard={this.props.saveBoard}
               dropColumnItem={this.props.dropColumnItem}
               dropColumn={this.props.dropColumn}
+              deleteBoard={this.props.deleteBoard}
+              history={this.props.history}
               boardId={this.props.boardId}
            />;
   }
@@ -78,11 +101,12 @@ const mapDispatchToProps = (dispatch, { service }) => {
     fetchBoard: fetchBoard(service),
     saveBoard: saveBoard(service),
     dropColumnItem: dropColumnItem,
-    dropColumn: dropColumn
+    dropColumn: dropColumn,
+    deleteBoard: deleteBoard(service),
   }, dispatch);
 };
 
 export default compose(
   withService(),
   connect(mapStateToProps, mapDispatchToProps)
-)(BoardContainer);
+)(withRouter(BoardContainer));

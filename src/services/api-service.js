@@ -50,6 +50,24 @@ export default class ApiService {
     return res;
   };
 
+  deleteResource = async (url) => {
+    const res = await fetch(`${this._apiBase}${url}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error(`Could not create resource ${url}` +
+        `, received ${res.status}`)
+    }
+
+    //return await res.json();
+    return res;
+  };
+
   getBoards = async () => {
    return await this.getResource(`/boards`);
   };
@@ -64,5 +82,9 @@ export default class ApiService {
 
   saveBoard = async (boardId, board) => {
     return await this.putResource(`/boards/${boardId}`, board);
+  };
+
+  deleteBoard = async (boardId) => {
+    return await this.deleteResource(`/boards/${boardId}`);
   };
 }

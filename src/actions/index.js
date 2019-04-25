@@ -60,6 +60,25 @@ const boardLoaded = (board) => {
   };
 };
 
+const deleteBoardRequest = () => {
+  return {
+    type: ActionTypes.deleteBoardRequest
+  };
+};
+
+const deleteBoardSuccess = () => {
+  return {
+    type: ActionTypes.deleteBoardSuccess
+  };
+};
+
+const deleteBoardError = (error) => {
+  return {
+    type: ActionTypes.deleteBoardFailure,
+    payload: error
+  };
+};
+
 const boardError = (error) => {
   return {
     type: ActionTypes.fetchBoardFailure,
@@ -129,6 +148,13 @@ export const dropColumn = (dropInfo) => {
   };
 };
 
+export const deleteColumn = (columnIndex) => {
+  return {
+    type: ActionTypes.deleteColumn,
+    payload: columnIndex
+  };
+};
+
 const fetchBoards = (service) => () => (dispatch) => {
   dispatch(boardsRequested());
   service.getBoards()
@@ -150,6 +176,18 @@ const addBoard = (service) => (newBoard, history) => (dispatch) => {
     });
 };
 
+const deleteBoard = (service) => (boardId, history) => (dispatch) => {
+  dispatch(deleteBoardRequest());
+  service.deleteBoard(boardId)
+    .then(() => {
+      dispatch(deleteBoardSuccess());
+      history.push("/");
+    })
+    .catch((err) => {
+      dispatch(deleteBoardError(err))
+    });
+};
+
 const fetchBoard = (service) => (boardId) => (dispatch) => {
   dispatch(boardRequested());
   service.getBoard(boardId)
@@ -168,5 +206,6 @@ export {
   addBoard,
   fetchBoard,
   saveBoard,
+  deleteBoard,
   ActionTypes
 };

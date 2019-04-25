@@ -188,6 +188,15 @@ const deleteColumnItem = ({ board }, { columnIndex, columnItemIndex }) => {
   }
 };
 
+const deleteColumn = ({ board }, { columnIndex }) => {
+  const { columns } = board;
+
+  return {
+    ...board,
+    columns: remove(columns, columnIndex)
+  }
+};
+
 const boardReducerAsync = (state, action) => {
 
   if (state === undefined) {
@@ -200,6 +209,7 @@ const boardReducerAsync = (state, action) => {
 
   switch (action.type) {
     case ActionTypes.fetchBoardRequest:
+    case ActionTypes.deleteBoardRequest:
       return {
         board: null,
         loading: true,
@@ -214,6 +224,7 @@ const boardReducerAsync = (state, action) => {
       };
 
     case ActionTypes.fetchBoardFailure:
+    case ActionTypes.deleteBoardFailure:
       return {
         board: null,
         loading: false,
@@ -255,7 +266,12 @@ const boardReducerAsync = (state, action) => {
         error: null
       };
 
-
+    case ActionTypes.deleteColumn:
+      return {
+        board: deleteColumn(state.boardAsync, action.payload),
+        loading: false,
+        error: null
+      };
 
     default:
       return state.boardAsync;
