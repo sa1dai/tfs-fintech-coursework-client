@@ -1,6 +1,6 @@
 export default class ApiService {
 
-  _apiBase = 'http://localhost:8000/api';
+  _apiBase = 'https://fintech-coursework-server.herokuapp.com/api';
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
