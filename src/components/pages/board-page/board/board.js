@@ -52,6 +52,7 @@ class Board extends Component {
           >
             <i className="fas fa-trash-alt"/>
           </button>
+          <span className="tip"><span className="text-success">Tip:</span> you can drag and drop columns and items</span>
         </div>
 
         <DragDropContext onDragEnd={this.onDragEnd}>
