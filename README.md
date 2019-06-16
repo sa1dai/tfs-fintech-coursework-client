@@ -4,4 +4,4 @@ Coursework Client
 
 Live demo: [https://fintech-coursework-client.herokuapp.com/](https://fintech-coursework-client.herokuapp.com/)
 
-[Server source code](https://gitlab.com/maxim.boichenko/fintech-coursework-server?nav_source=navbar)
+[Server source code](https://github.com/sa1dai/tfs-fintech-coursework-server)
