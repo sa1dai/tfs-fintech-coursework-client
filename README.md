@@ -1,4 +1,4 @@
-Tinkoff Fintech Frontend Spring 2019
+## Tinkoff Fintech Frontend Spring 2019
 
 Coursework client (react\redux)
 
