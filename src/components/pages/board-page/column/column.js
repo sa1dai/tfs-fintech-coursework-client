@@ -12,11 +12,11 @@ import {connect} from "react-redux";
 class Column extends Component {
   onColumnDelete = () => {
     const { columnIndex, deleteColumn } = this.props;
-    const result = window.prompt("The column will be deleted. Type 11 to delete it.");
+    //const result = window.prompt("The column will be deleted. Type 11 to delete it.");
 
-    if (result === '11') {
+    //if (result === '11') {
       deleteColumn(columnIndex);
-    }
+    //}
   };
 
   render() {

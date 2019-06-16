@@ -8,11 +8,11 @@ import {connect} from "react-redux";
 class ColumnItem  extends Component {
   onItemDelete = () => {
     const { columnIndex, columnItemIndex } = this.props;
-    const result = window.prompt("The item will be deleted. Type 1 to delete it.");
+    //const result = window.prompt("The item will be deleted. Type 1 to delete it.");
 
-    if (result === '1') {
+    //if (result === '1') {
       this.props.deleteColumnItem(columnIndex, columnItemIndex);
-    }
+    //}
   };
 
   render() {

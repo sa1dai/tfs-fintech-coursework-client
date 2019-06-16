@@ -30,11 +30,11 @@ class Board extends Component {
 
   onBoardDelete = () => {
     const { boardId, deleteBoard, history } = this.props;
-    const result = window.prompt("The board will be deleted. Type 111 to delete it.");
+    //const result = window.prompt("The board will be deleted. Type 111 to delete it.");
 
-    if (result === '111') {
+    //if (result === '111') {
       deleteBoard(boardId, history);
-    }
+    //}
   };
 
   render() {
