@@ -1,6 +1,6 @@
 Tinkoff Fintech Frontend Spring 2019
 
-Coursework Client (react\redux)
+Coursework client (react\redux)
 
 Live demo: [https://fintech-coursework-client.herokuapp.com/](https://fintech-coursework-client.herokuapp.com/)
 
