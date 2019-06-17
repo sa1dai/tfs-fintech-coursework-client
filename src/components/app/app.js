@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/"
                component={HomePage}
                exact />
-        <Route path="/b/:id/:title"
+        <Route path="/b/:id"
                render={({ match }) => {
                  const { id } = match.params;
                  return <Board boardId={id} />
